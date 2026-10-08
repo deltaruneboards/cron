@@ -24,6 +24,6 @@ export default {
 				...json,
 			});
 		}
-		await env.KV.put('monitoring', JSON.stringify(monitoring));
+		// await env.KV.put('monitoring', JSON.stringify(monitoring));
 	},
 } satisfies ExportedHandler<Env>;
