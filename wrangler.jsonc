@@ -16,9 +16,16 @@
 		"mode": "smart"
 	},
 	"vars": {},
+	"kv_namespaces": [
+		{
+			"binding": "KV",
+			"id": "0c4a1c8a6ef94b67b02db3a067acb435"
+		}
+	],
 	"secrets": {
 		"required": [
 			"CRON_KEY",
+			"MONITORING_WEBHOOK",
 		],
 	},
 }
