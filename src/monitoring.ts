@@ -99,12 +99,15 @@ export async function monitoring(
 	}
 	if (messagesToSend.length > 0) {
 		const webhookResponse = await fetch(env.MONITORING_WEBHOOK, {
-			method: 'POST',
 			body: JSON.stringify({
 				content: messagesToSend.length > 1 ?
 					messagesToSend.map(m => `- ${m}`).join('\n') :
 					messagesToSend[0],
 			}),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
 		});
 		if (!webhookResponse.ok) {
 			console.error({
