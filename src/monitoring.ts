@@ -33,7 +33,7 @@ const METRICS: Record<string, Metric> = {
 		shouldAlert: res => res.error,
 		thresholdTimes: 3,
 		thresholdRuns: 5,
-		raisedMessage: 'cron experienced failure 3 times in the last 5 runs, check [error log](<https://deltaruneboards.net/index.php?action=admin;area=logs;sa=errorlog>) and whether the site is still accessible',
+		raisedMessage: 'cron experienced failure 3 times in the last 5 runs, check [error log](<https://deltaruneboards.net/index.php?action=admin;area=logs;sa=errorlog;desc=>) and whether the site is still accessible',
 		resolvedMessage: 'cron is no longer experiencing failures',
 	},
 	overtime: {
@@ -47,7 +47,7 @@ const METRICS: Record<string, Metric> = {
 		shouldAlert: res => !res.error && res.failed > 0,
 		thresholdTimes: 5,
 		thresholdRuns: 10,
-		raisedMessage: 'there seems to be a large amount of failed tasks in the last 10 minutes, check [error log](<https://deltaruneboards.net/index.php?action=admin;area=logs;sa=errorlog>)',
+		raisedMessage: 'there seems to be a large amount of failed tasks in the last 10 minutes, check [error log](<https://deltaruneboards.net/index.php?action=admin;area=logs;sa=errorlog;desc=>)',
 		resolvedMessage: 'background tasks seem to have stopped failing',
 	},
 	load: {
