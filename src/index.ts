@@ -1,6 +1,8 @@
+import {monitoring} from './monitoring';
+
 export default {
 	async scheduled(event, env, ctx): Promise<void> {
-		const [response, monitoringData] = await Promise.all([
+		const [response, monitoringDataString] = await Promise.all([
 			fetch('https://deltaruneboards.net/cron.php', {
 				headers: {
 					'X-CF-Worker': env.CRON_KEY,
@@ -8,7 +10,7 @@ export default {
 			}),
 			env.KV.get('monitoring'),
 		]);
-		const monitoring = JSON.parse(monitoringData || '{}');
+		const monitoringData = JSON.parse(monitoringDataString || '{}');
 		if (!response.ok) {
 			const text = await response.text();
 			console.error({
@@ -17,13 +19,26 @@ export default {
 				headers: response.headers,
 				text,
 			});
-		} else {
-			const json: any = await response.json();
-			console.info({
-				message: 'successful cron invocation',
-				...json,
+			await monitoring(env, monitoringData, {
+				error: true,
 			});
+		} else {
+			try {
+				const json: any = await response.json();
+				console.info({
+					message: 'successful cron invocation',
+					...json,
+				});
+				await monitoring(env, monitoringData, json);
+			} catch (error) {
+				console.error({
+					message: 'failed to parse cron.php response',
+					error,
+				});
+				await monitoring(env, monitoringData, {
+					error: true,
+				});
+			}
 		}
-		// await env.KV.put('monitoring', JSON.stringify(monitoring));
 	},
 } satisfies ExportedHandler<Env>;
