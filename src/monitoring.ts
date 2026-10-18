@@ -51,7 +51,7 @@ const METRICS: Record<string, Metric> = {
 		resolvedMessage: 'background tasks seem to have stopped failing',
 	},
 	load: {
-		shouldAlert: res => !res.error && !res.overtime && res.load1 > 4,
+		shouldAlert: res => !res.error && !res.overtime && res.load1 > 8,
 		thresholdTimes: 3,
 		thresholdRuns: 5,
 		raisedMessage: 'the server seems to be under load',
