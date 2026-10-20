@@ -50,13 +50,13 @@ const METRICS: Record<string, Metric> = {
 		raisedMessage: 'there seems to be a large amount of failed tasks in the last 10 minutes, check [error log](<https://deltaruneboards.net/index.php?action=admin;area=logs;sa=errorlog;desc=>)',
 		resolvedMessage: 'background tasks seem to have stopped failing',
 	},
-	load: {
-		shouldAlert: res => !res.error && !res.overtime && res.load1 > 8,
-		thresholdTimes: 3,
-		thresholdRuns: 5,
-		raisedMessage: 'the server seems to be under load',
-		resolvedMessage: 'the server seems to no longer be under load',
-	},
+	// load: {
+	// 	shouldAlert: res => !res.error && !res.overtime && res.load1 > 8,
+	// 	thresholdTimes: 3,
+	// 	thresholdRuns: 5,
+	// 	raisedMessage: 'the server seems to be under load',
+	// 	resolvedMessage: 'the server seems to no longer be under load',
+	// },
 };
 
 export async function monitoring(
